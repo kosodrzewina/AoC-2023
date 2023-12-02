@@ -19,34 +19,35 @@ pqr3stu8vwx
 a1b2c3d4e5f
 treb7uchet
 In this example, the calibration values of these four lines are 12, 38, 15, and 77. Adding these together produces 142.
+
+Consider your entire calibration document. What is the sum of all of the calibration values?
 */
 
 using System.Text.RegularExpressions;
 
 namespace day_1;
 
-internal partial class Part1
+internal partial class Part1(string filePath)
 {
-    public Part1(string inputFile)
-    {
-        InputFile = inputFile;
-    }
-
-    public string InputFile { get; set; }
-
-    public long Result;
+    private readonly string _filePath = filePath;
 
     [GeneratedRegex("[^0-9]")]
     private static partial Regex NonDigitRegex();
+
+    public long Result { get; private set; }
 
     public void Run()
     {
         var sum = 0L;
 
-        var obfuscatedCalibrationValues = File.ReadAllLines(InputFile).ToList();
+        var obfuscatedCalibrationValues = File.ReadAllLines(_filePath).ToList();
         foreach (var obfuscatedCalibrationValue in obfuscatedCalibrationValues)
         {
             var digits = NonDigitRegex().Replace(obfuscatedCalibrationValue, string.Empty);
+            if (string.IsNullOrEmpty(digits))
+            {
+                continue;
+            }
 
             var parsed = int.TryParse($"{digits.First()}{digits.Last()}", out var calibrationValue);
             if (parsed)

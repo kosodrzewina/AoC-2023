@@ -76,7 +76,7 @@ public class Part1 {
                     digitBuffer.setLength(0);
                 }
 
-                if (Character.isDigit(character) && validateDigitInEngineSchematics(i, j, engineSchematic)) {
+                if (Character.isDigit(character) && validateDigitInEngineSchematic(i, j, engineSchematic)) {
                     isPartValidated = true;
                 }
             }
@@ -85,7 +85,7 @@ public class Part1 {
         result = partNumbers.stream().mapToInt(Integer::intValue).sum();
     }
 
-    private boolean validateDigitInEngineSchematics(int i, int j, List<List<Character>> engineSchematics) {
+    private boolean validateDigitInEngineSchematic(int i, int j, List<List<Character>> engineSchematics) {
         var adjacentIndices = Arrays.asList(
             new int[] { i - 1, j },
             new int[] { i - 1, j - 1},

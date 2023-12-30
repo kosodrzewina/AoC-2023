@@ -49,7 +49,6 @@ import (
 type card struct {
 	winningNumbers []int
 	numbers        []int
-	points         int
 }
 
 func Run(filePath string) {
